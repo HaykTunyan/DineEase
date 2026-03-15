@@ -9,6 +9,7 @@ import HomeScreen from '../screens/Home/HomeScreen';
 import MenuScreen from '../screens/Menu/MenuScreen';
 import RestaurantList from '../screens/Restaurants/RestaurantList';
 import NotificationScreen from '../screens/Notification/NotificationScreen';
+import ReservationScreen from '../screens/Reservation/ReservationScreen';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -18,6 +19,7 @@ const TabIcon = ({ name, color, focused }: { name: string, color: string, focuse
     Menu: '🍽️',
     Restaurants: '🏪',
     Notification: '🔔',
+    Reservation: '📅',
   };
 
   return (
@@ -42,8 +44,9 @@ export const MainTabNavigator = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Menu" component={MenuScreen} />
       <Tab.Screen name="Restaurants" component={RestaurantList} />
+      <Tab.Screen name="Menu" component={MenuScreen} />
+      <Tab.Screen name="Reservation" component={ReservationScreen} />
       <Tab.Screen name="Notification" component={NotificationScreen} />
     </Tab.Navigator>
   );

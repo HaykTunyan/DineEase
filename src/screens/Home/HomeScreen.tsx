@@ -13,6 +13,7 @@ import {
 import { Colors } from '@theme/colors';
 import { CATEGORIES, RESTAURANTS } from '@utils/mockData';
 import RestaurantCard from '@components/specific/RestaurantCard';
+import { useCart } from '@hooks/index';
 
 const { width } = Dimensions.get('window');
 
@@ -21,6 +22,14 @@ interface Props {
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
+  const { cartCount } = useCart();
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigation?.navigate('Restaurants', { query: searchQuery });
+    }
+  };
   const handleRestaurantPress = (restaurant: any) => {
     // Navigate to Restaurant details or Menu
     navigation?.navigate('Menu', { restaurantId: restaurant.id });
@@ -42,11 +51,16 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.headerRight}>
           <TouchableOpacity style={styles.cartButton}>
             <Text style={styles.cartIcon}>🛒</Text>
-            <View style={styles.cartBadge}>
-              <Text style={styles.cartBadgeText}>2</Text>
-            </View>
+            {cartCount > 0 && (
+              <View style={styles.cartBadge}>
+                <Text style={styles.cartBadgeText}>{cartCount}</Text>
+              </View>
+            )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.profileButton}>
+          <TouchableOpacity 
+            style={styles.profileButton}
+            onPress={() => navigation?.navigate('Notification')}
+          >
             <Image 
               source={{ uri: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100' }} 
               style={styles.profileThumb}
@@ -65,6 +79,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
               placeholder="Search dishes, restaurants..." 
               placeholderTextColor={Colors.textSecondary}
               style={styles.searchInput}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              onSubmitEditing={handleSearch}
             />
           </View>
         </View>

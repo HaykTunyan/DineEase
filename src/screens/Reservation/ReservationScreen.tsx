@@ -9,6 +9,7 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/common/Header';
 import TABLES from '../../json/tableItems.json';
 import ReservationHistory from './ReservationHistory';
@@ -17,10 +18,11 @@ const { width } = Dimensions.get('window');
 const TIME_SLOTS = ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'];
 
 interface Props {
-  setActiveTab: (tab: string) => void;
+  setActiveTab?: (tab: string) => void;
 }
 
 const ReservationScreen: React.FC<Props> = ({ setActiveTab }) => {
+  const navigation = useNavigation<any>();
 
 
   /**
@@ -124,7 +126,11 @@ const ReservationScreen: React.FC<Props> = ({ setActiveTab }) => {
                 style={styles.modalConfirm}
                 onPress={() => {
                   setReservationVisible(false);
-                  setActiveTab('Home');
+                  if (setActiveTab) {
+                    setActiveTab('Home');
+                  } else {
+                    navigation.navigate('Home');
+                  }
                 }}
               >
                 <Text style={styles.modalConfirmText}>Reserve Now</Text>

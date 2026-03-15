@@ -6,29 +6,42 @@ import {
   TextInput, 
   RefreshControl, 
   TouchableOpacity, 
-  Text 
+  Text,
+  Modal,
+  ScrollView,
 } from 'react-native';
 import Header from '@components/common/Header';
 import RestaurantCard from '@components/specific/RestaurantCard';
 import { Colors } from '@theme/colors';
 import { RESTAURANTS } from '@utils/mockData';
+import { useRoute } from '@react-navigation/native';
 
 interface Props {
   navigation?: any;
 }
 
 const RestaurantList = ({ navigation }: Props) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const route = useRoute<any>();
+  const [searchQuery, setSearchQuery] = useState(route.params?.query || '');
   const [refreshing, setRefreshing] = useState(false);
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedCuisine, setSelectedCuisine] = useState('All');
+
+  const cuisines = ['All', 'Italian', 'Japanese', 'Mexican', 'French', 'Vegan', 'Seafood', 'Indian'];
 
   const handleRestaurantPress = (restaurantId: string) => {
     navigation?.navigate('Menu', { restaurantId });
   };
 
-  const filteredRestaurants = RESTAURANTS.filter(r => 
-    r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    r.cuisine.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRestaurants = RESTAURANTS.filter(r => {
+    const matchesSearch = r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      r.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      r.location.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesCuisine = selectedCuisine === 'All' || r.cuisine === selectedCuisine;
+    
+    return matchesSearch && matchesCuisine;
+  });
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -50,10 +63,57 @@ const RestaurantList = ({ navigation }: Props) => {
             onChangeText={setSearchQuery}
           />
         </View>
-        <TouchableOpacity style={styles.filterButton} activeOpacity={0.7}>
+        <TouchableOpacity 
+          style={styles.filterButton} 
+          activeOpacity={0.7}
+          onPress={() => setFilterVisible(true)}
+        >
           <Text style={styles.filterIcon}>⚙️</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal
+        visible={filterVisible}
+        animationType="slide"
+        transparent={true}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Filters</Text>
+              <TouchableOpacity onPress={() => setFilterVisible(false)}>
+                <Text style={styles.closeIcon}>✕</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.filterSectionLabel}>Cuisine Type</Text>
+            <View style={styles.filterTags}>
+              {cuisines.map(cuisine => (
+                <TouchableOpacity
+                  key={cuisine}
+                  style={[
+                    styles.filterTag,
+                    selectedCuisine === cuisine && styles.filterTagActive
+                  ]}
+                  onPress={() => setSelectedCuisine(cuisine)}
+                >
+                  <Text style={[
+                    styles.filterTagText,
+                    selectedCuisine === cuisine && styles.filterTagTextActive
+                  ]}>{cuisine}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <TouchableOpacity 
+              style={styles.applyBtn}
+              onPress={() => setFilterVisible(false)}
+            >
+              <Text style={styles.applyBtnText}>Apply Filters</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       <FlatList
         data={filteredRestaurants}
@@ -131,6 +191,80 @@ const styles = StyleSheet.create({
   listContent: {
     padding: 15,
     paddingBottom: 100, // Extra space for tabBar
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: Colors.surface,
+    padding: 25,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    color: Colors.text,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  closeIcon: {
+    color: Colors.textSecondary,
+    fontSize: 24,
+  },
+  filterSectionLabel: {
+    color: Colors.primary,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textTransform: 'uppercase',
+  },
+  filterTags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 30,
+  },
+  filterTag: {
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    backgroundColor: Colors.surfaceLight,
+  },
+  filterTagActive: {
+    backgroundColor: Colors.primary,
+    borderColor: Colors.primary,
+  },
+  filterTagText: {
+    color: Colors.textSecondary,
+    fontSize: 14,
+  },
+  filterTagTextActive: {
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  applyBtn: {
+    backgroundColor: Colors.primary,
+    height: 55,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  applyBtnText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

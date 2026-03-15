@@ -10,5 +10,6 @@ export type MainTabParamList = {
   Home: undefined;
   Menu: { restaurantId?: string } | undefined;
   Restaurants: undefined;
+  Reservation: undefined;
   Notification: undefined;
 };

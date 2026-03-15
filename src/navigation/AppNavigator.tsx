@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './types';
 
@@ -15,18 +16,20 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  */
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      {/* 
-        We use a Stack Navigator at the root because it allows us to show Modal screens,
-        Authentication screens, and Push standard screens over the MainTabNavigator.
-      */}
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* The Tabs handles primary bottom navigation, nested inside the stack as the initial route */}
-        <Stack.Screen name="MainTabs" component={MainTabNavigator} />
-        
-        {/* We can define global stack screens here that don't have bottom tabs */}
-        <Stack.Screen name="About" component={AboutScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        {/* 
+          We use a Stack Navigator at the root because it allows us to show Modal screens,
+          Authentication screens, and Push standard screens over the MainTabNavigator.
+        */}
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {/* The Tabs handles primary bottom navigation, nested inside the stack as the initial route */}
+          <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+          
+          {/* We can define global stack screens here that don't have bottom tabs */}
+          <Stack.Screen name="About" component={AboutScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };

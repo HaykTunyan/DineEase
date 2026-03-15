@@ -13,11 +13,14 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import Header from '@components/common/Header';
 import { Colors } from '@theme/colors';
 import { RESTAURANTS, MENU_ITEMS } from '@utils/mockData';
+import { useCart } from '@hooks/index';
+import CartOverlay from '@components/specific/CartOverlay';
 
 const MenuScreen: React.FC = () => {
   const route = useRoute<any>();
   const navigation = useNavigation<any>();
   const { restaurantId } = route.params || {};
+  const { addToCart, cartItems } = useCart();
 
   const restaurant = useMemo(() => {
     return RESTAURANTS.find(r => r.id === restaurantId);
@@ -75,8 +78,19 @@ const MenuScreen: React.FC = () => {
                 <Text style={styles.menuItemPrice}>{item.price}</Text>
               </View>
               <Text style={styles.menuItemDesc} numberOfLines={2}>{item.description}</Text>
-              <TouchableOpacity style={styles.addBtn}>
-                <Text style={styles.addBtnText}>+ Add to Order</Text>
+              <TouchableOpacity 
+                style={[
+                  styles.addBtn, 
+                  cartItems.find(i => i.id === item.id) && styles.addBtnActive
+                ]} 
+                onPress={() => addToCart(item)}
+              >
+                <Text style={[
+                  styles.addBtnText,
+                  cartItems.find(i => i.id === item.id) && styles.addBtnTextActive
+                ]}>
+                  {cartItems.find(i => i.id === item.id) ? '✓ Added' : '+ Add to Order'}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -84,6 +98,7 @@ const MenuScreen: React.FC = () => {
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
       />
+      <CartOverlay />
     </View>
   );
 };
@@ -191,11 +206,22 @@ const styles = StyleSheet.create({
   addBtn: {
     marginTop: 10,
     alignSelf: 'flex-start',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+  },
+  addBtnActive: {
+    backgroundColor: Colors.primary,
   },
   addBtnText: {
     color: Colors.primary,
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  addBtnTextActive: {
+    color: '#000',
   },
 });
 
