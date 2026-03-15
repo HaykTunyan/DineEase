@@ -1,0 +1,27 @@
+diff --git a/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/aar_metadata/debug/aar-metadata.properties b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/aar_metadata/debug/aar-metadata.properties
+new file mode 100644
+index 0000000..776557e
+--- /dev/null
++++ b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/aar_metadata/debug/aar-metadata.properties
+@@ -0,0 +1,5 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
+diff --git a/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+new file mode 100644
+index 0000000..ca4c607
+--- /dev/null
++++ b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Sun Mar 15 17:15:09 AMT 2026
+diff --git a/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+new file mode 100644
+index 0000000..f077327
+--- /dev/null
++++ b/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\src\main\res"/><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\build\generated\res\rs\debug"/><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\src\main\res"/><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\build\generated\res\rs\debug"/><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\haykt\Documents\React-Native-Project\DineEase\node_modules\@react-native-async-storage\async-storage\android\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"/><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"/><mergedItems/></merger>
+\ No newline at end of file
