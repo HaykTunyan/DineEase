@@ -11,6 +11,18 @@ interface FetchState<T> {
  * Supports basic caching if needed, and clean state structure.
  */
 export function useFetch<T>(url: string | null, options?: RequestInit) {
+
+  /**
+   * 
+   * useFetch Hook
+   * 
+   * This hook takes a URL and optional fetch options, and returns an object containing the fetched data, loading state, error state, and a refetch function.
+   * It uses useState to manage the data, loading, and error states, and useEffect to trigger the fetch when the URL or options change.
+   * The fetchData function is defined using useCallback to ensure it has a stable reference for useEffect dependencies. It performs the fetch operation, updates the state accordingly, and handles any errors that may occur.
+   * 
+   */
+
+
   const [state, setState] = useState<FetchState<T>>({
     data: null,
     loading: false,

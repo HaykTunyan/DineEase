@@ -22,6 +22,10 @@ const RestaurantCard = ({ restaurant, onPress }: RestaurantCardProps) => {
   /**
    * 
    * Restaurant Card Component
+   * 
+   * This component displays a restaurant's image, name, location, rating, reviews, cuisine type, price range, and delivery time.
+   * It is designed to be used in lists of restaurants, such as on the Home screen or in search results.
+   * 
    */
 
 

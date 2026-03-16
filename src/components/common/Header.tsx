@@ -8,6 +8,16 @@ interface HeaderProps {
 }
 
 const Header = ({ title, onBack }: HeaderProps) => (
+
+  /**
+   * 
+   * A custom header component that can be used across the app.
+   * It displays a title and an optional back button.
+   * The back button is only shown if the onBack prop is provided.
+   * The header is styled to be consistent with the app's theme and platform conventions.
+   */
+
+
   <View style={styles.header}>
     {onBack && (
       <TouchableOpacity onPress={onBack} style={styles.backButton}>

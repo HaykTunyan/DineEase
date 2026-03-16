@@ -16,6 +16,17 @@ import { useCart } from '@hooks/index';
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const CartOverlay = () => {
+
+  /**
+   * 
+   * CartOverlay is a component that provides a floating cart summary bar and a detailed cart modal.
+   * The floating bar appears when there are items in the cart and allows users to quickly view their cart total and item count.
+   * Tapping the floating bar opens a modal that displays the cart items, allows quantity adjustments, and provides a checkout button.
+   * 
+   * 
+   */
+
+
   const { cartItems, cartTotal, cartCount, updateQuantity, clearCart } = useCart();
   const [modalVisible, setModalVisible] = useState(false);
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
